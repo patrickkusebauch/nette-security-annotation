@@ -10,7 +10,6 @@
     }
   ],
   "require": {
-    "nette/application": "2.2.2"
   },
   "require-dev": {
     "codeception/codeception": "*",
