@@ -50,4 +50,17 @@ trait PresenterTrait
             }
         }
     }
+
+    protected function tryCall($method, array $params)
+    {
+        $rc = $this->getReflection();
+        if ($rc->hasMethod($method)) {
+            $rm = $rc->getMethod($method);
+            if ($rm->isPublic() && !$rm->isAbstract() && !$rm->isStatic()) {
+                $this->checkRequirements($rm);
+                $rm->invokeNamedArgs($this, $params);
+            }
+        }
+    }
+
 }
