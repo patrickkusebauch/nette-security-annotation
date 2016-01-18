@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/patrickkusebauch/nette-security-annotation.svg?branch=master)](https://travis-ci.org/patrickkusebauch/nette-security-annotation)
+
 # nette-security-annotation
 Security by annotations in Nette.
 
