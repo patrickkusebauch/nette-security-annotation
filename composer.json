@@ -1,6 +1,6 @@
 {
   "name": "kusebauch/nette-security-annotation",
-  "description": "Acl security form presentor actions, signals and components by annotations",
+  "description": "Acl security for presenter actions, signals and components by annotations",
   "minimum-stability": "stable",
   "license": "MIT X11",
   "authors": [
@@ -18,5 +18,8 @@
     "codeception/specify": "*",
     "codeception/verify": "*",
     "mockery/mockery": "*"
+  },
+  "autoload": {
+    "psr-4": {"Kusebauch\\NetteSecurityAnnotation\\": "src/"}
   }
 }

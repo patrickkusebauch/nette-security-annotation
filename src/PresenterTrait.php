@@ -11,6 +11,7 @@ trait PresenterTrait
 {
     public function checkRequirements($element)
     {
+        parent::checkRequirements($element);
         if ($element instanceof ClassType) {return;}; //not checking class access, only method access
         $user = $this->user;
         // Allowing for both method level and class level annotations
@@ -54,5 +55,6 @@ trait PresenterTrait
                 throw new ForbiddenRequestException("Creation of component '$name' is forbidden for action '$this->action'.");
             }
         }
+        return parent::createComponent($name);
     }
 }

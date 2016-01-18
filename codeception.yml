@@ -15,3 +15,12 @@ modules:
             user: ''
             password: ''
             dump: tests/_data/dump.sql
+coverage:
+    enabled: true
+    whitelist:
+        include:
+            - src/*
+    blacklist:
+        include:
+            - vendor/*
+            - tests/*
