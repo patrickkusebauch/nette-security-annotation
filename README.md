@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/patrickkusebauch/nette-security-annotation.svg?branch=master)](https://travis-ci.org/patrickkusebauch/nette-security-annotation) [![codecov.io](https://codecov.io/github/patrickkusebauch/nette-security-annotation/coverage.svg?branch=master)](https://codecov.io/github/patrickkusebauch/nette-security-annotation?branch=master)
+[![Build Status](https://travis-ci.org/patrickkusebauch/nette-security-annotation.svg?branch=master)](https://travis-ci.org/patrickkusebauch/nette-security-annotation) [![codecov.io](https://codecov.io/github/patrickkusebauch/nette-security-annotation/coverage.svg?branch=master)](https://codecov.io/github/patrickkusebauch/nette-security-annotation?branch=master)[![Latest Stable Version](https://poser.pugx.org/kusebauch/nette-security-annotation/v/stable)](https://packagist.org/packages/kusebauch/nette-security-annotation)[![License](https://poser.pugx.org/kusebauch/nette-security-annotation/license)](https://packagist.org/packages/kusebauch/nette-security-annotation)
 
 # nette-security-annotation
 Security by annotations in Nette.
@@ -26,4 +26,4 @@ Specific annotation for "createComponent*" methods. Can tie this this component 
 It is defined by the "@Action" annotation and the rules are the same as are for the Privilege annotation.
 
 ##Example
-Coming soon.
+For examples of usage, see "tests/_support".
