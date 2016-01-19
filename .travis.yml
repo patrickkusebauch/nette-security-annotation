@@ -13,4 +13,7 @@ install:
   - composer install
 
 script:
-  - php vendor/codeception/codeception/codecept run integration
+  - php vendor/codeception/codeception/codecept run integration --coverage-xml
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
