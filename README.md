@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/patrickkusebauch/nette-security-annotation.svg?branch=master)](https://travis-ci.org/patrickkusebauch/nette-security-annotation)
+[![Build Status](https://travis-ci.org/patrickkusebauch/nette-security-annotation.svg?branch=master)](https://travis-ci.org/patrickkusebauch/nette-security-annotation) [![codecov.io](https://codecov.io/github/patrickkusebauch/nette-security-annotation/coverage.svg?branch=master)](https://codecov.io/github/patrickkusebauch/nette-security-annotation?branch=master)
 
 # nette-security-annotation
 Security by annotations in Nette.
