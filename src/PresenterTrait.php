@@ -7,7 +7,7 @@ trait PresenterTrait
     public function checkRequirements($element)
     {
         if ($element instanceof \ClassReflection) {return;}; //not checking class access, only method access
-        $user = $this->user;
+        $user = $this->getUser();
         // Allowing for both method level and class level annotations
         $class = ($element instanceof \MethodReflection) ? $element->getDeclaringClass() : $element;
         $secured = $element->getAnnotation('Secured') || $class->getAnnotation('Secured');
