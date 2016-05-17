@@ -49,6 +49,8 @@ trait PresenterTrait
                 throw new \ForbiddenRequestException("Creation of component '$name' is forbidden for action '$this->action'.");
             }
         }
+
+	    return parent::createComponent($name);
     }
 
     protected function tryCall($method, array $params)
@@ -59,8 +61,10 @@ trait PresenterTrait
             if ($rm->isPublic() && !$rm->isAbstract() && !$rm->isStatic()) {
                 $this->checkRequirements($rm);
                 $rm->invokeNamedArgs($this, $params);
+	            return true;
             }
         }
+	    return false;
     }
 
 }
