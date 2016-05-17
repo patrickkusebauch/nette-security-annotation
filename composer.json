@@ -17,5 +17,8 @@
     "codeception/specify": "*",
     "codeception/verify": "*",
     "mockery/mockery": "*"
+  },
+  "autoload": {
+    "psr-4": {"Kusebauch\\NetteSecurityAnnotation\\": "src/"}
   }
 }
