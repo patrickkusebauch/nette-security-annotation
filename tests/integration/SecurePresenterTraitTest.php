@@ -29,7 +29,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $user = Mockery::mock(new \Nette\Security\User(new \Nette\Http\UserStorage($session)));
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
             $user->shouldReceive("isAllowed")->withArgs(['action', 'show'])->andReturn(TRUE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "default", []));
         });
 
@@ -41,7 +44,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $user = Mockery::mock(new \Nette\Security\User(new \Nette\Http\UserStorage($session)));
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
             $user->shouldReceive("isAllowed")->withArgs(['action', 'show'])->andReturn(FALSE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "default", []));
         }, ['throws' => Nette\Application\ForbiddenRequestException::class]);
     }
@@ -57,7 +63,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
             $user->shouldReceive("isAllowed")->withArgs(['action', 'show'])->andReturn(FALSE);
             $user->shouldReceive("isAllowed")->withArgs(['action', 'other'])->andReturn(TRUE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "multiple", ["action" => "multiple"]));
         });
 
@@ -70,7 +79,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
             $user->shouldReceive("isAllowed")->withArgs(['action', 'show'])->andReturn(FALSE);
             $user->shouldReceive("isAllowed")->withArgs(['action', 'other'])->andReturn(FALSE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "multiple", ["action" => "multiple"]));
         }, ['throws' => Nette\Application\ForbiddenRequestException::class]);
     }
@@ -85,7 +97,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $user = Mockery::mock(new \Nette\Security\User(new \Nette\Http\UserStorage($session)));
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
             $user->shouldReceive("isAllowed")->withArgs(['signal', 'show'])->andReturn(TRUE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "unknown", [
                 "do" => "signal",
                 "action" => "unknown"
@@ -100,7 +115,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $user = Mockery::mock(new \Nette\Security\User(new \Nette\Http\UserStorage($session)));
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
             $user->shouldReceive("isAllowed")->withArgs(['signal', 'show'])->andReturn(FALSE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "unknown", [
                 "do" => "signal",
                 "action" => "unknown"
@@ -119,7 +137,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
             $user->shouldReceive("isAllowed")->withArgs(['signal', 'show'])->andReturn(FALSE);
             $user->shouldReceive("isAllowed")->withArgs(['signal', 'other'])->andReturn(TRUE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "unknown", [
                 "do" => "multi",
                 "action" => "unknown"
@@ -135,7 +156,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
             $user->shouldReceive("isAllowed")->withArgs(['signal', 'show'])->andReturn(FALSE);
             $user->shouldReceive("isAllowed")->withArgs(['signal', 'other'])->andReturn(FALSE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "unknown", [
                 "do" => "multi",
                 "action" => "unknown"
@@ -152,7 +176,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $session = new \Nette\Http\Session($request, $response);
             $user = Mockery::mock(new \Nette\Security\User(new \Nette\Http\UserStorage($session)));
             $user->shouldReceive("isLoggedIn")->andReturn(TRUE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "invalid", ["action" => "invalid"]));
         }, ['throws' => Nette\InvalidStateException::class]);
     }
@@ -166,7 +193,10 @@ class SecurePresenterTraitTest extends \Codeception\TestCase\Test
             $session = new \Nette\Http\Session($request, $response);
             $user = Mockery::mock(new \Nette\Security\User(new \Nette\Http\UserStorage($session)));
             $user->shouldReceive("isLoggedIn")->andReturn(FALSE);
-            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user);
+            $presenter->injectPrimary(NULL, NULL, NULL, $request, $response, $session, $user,
+                new \Nette\Bridges\ApplicationLatte\TemplateFactory(
+                    new \Kusebauch\NetteSecurityAnnotation\Tests\LatteFactory()
+                ));
             $presenter->run(new \Nette\Application\Request("SecurePresenterDummy", "invalid", ["action" => "invalid"]));
         }, ['throws' => \Nette\Application\ForbiddenRequestException::class]);
     }

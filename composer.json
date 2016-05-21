@@ -10,7 +10,8 @@
     }
   ],
   "require": {
-    "nette/application": "2.2.2"
+    "nette/application": "2.3.*",
+    "latte/latte": "*"
   },
   "require-dev": {
     "codeception/codeception": "*",

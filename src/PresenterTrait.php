@@ -9,11 +9,28 @@ use Nette\Reflection\Method;
 
 trait PresenterTrait
 {
+
+    /**
+     * @return \Nette\Security\User
+     */
+    abstract public function getUser();
+
+    /**
+     * @return \Nette\Application\UI\PresenterComponentReflection
+     */
+    abstract public static function getReflection();
+
+    /**
+     * Returns current action name.
+     * @return string
+     */
+    abstract public function getAction($fullyQualified = FALSE);
+
     public function checkRequirements($element)
     {
         parent::checkRequirements($element);
         if ($element instanceof ClassType) {return;}; //not checking class access, only method access
-        $user = $this->user;
+        $user = $this->getUser();
         // Allowing for both method level and class level annotations
         $class = ($element instanceof Method) ? $element->getDeclaringClass() : $element;
         $secured = $element->getAnnotation('Secured') || $class->getAnnotation('Secured');
@@ -28,15 +45,11 @@ trait PresenterTrait
                 }
                 $resource = $element->hasAnnotation('Resource') ? $element->getAnnotation('Resource') : $class->getAnnotation('Resource');
                 $privileges = array_merge((array) $class->getAnnotation('Privilege'), (array) $element->getAnnotation('Privilege'));
-                $allowed = FALSE;
                 foreach ($privileges as $privilege) {
-                    if ($user->isAllowed($resource, $privilege)) $allowed = TRUE;
+                    if ($user->isAllowed($resource, $privilege)) return;
                 }
-                if (!$allowed) {
-                    throw new ForbiddenRequestException("User is not allowed to access resource '$resource'");
-                }
+                throw new ForbiddenRequestException("User is not allowed to access resource '$resource'");
             }
-
         }
     }
 
@@ -52,7 +65,7 @@ trait PresenterTrait
 
             $annotations = (array) $reflection->getAnnotation('Action');
             if (!empty($annotations) && !in_array($this->getAction(), $annotations)) {
-                throw new ForbiddenRequestException("Creation of component '$name' is forbidden for action '$this->action'.");
+                throw new ForbiddenRequestException("Creation of component '$name' is forbidden for action '" . $this->getAction() . "'.");
             }
         }
         return parent::createComponent($name);
